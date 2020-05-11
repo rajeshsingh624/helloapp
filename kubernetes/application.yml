@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloapp
+  labels:
+    app: helloapp
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      name: helloapp-port
+  selector:
+    app: helloapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloapp
+  labels:
+    app: helloapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloapp
+  template:
+    metadata:
+      labels:
+        app: helloapp
+    spec:
+      containers:
+      - name: helloapp-container
+        image: txconsole/helloapp
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+      imagePullSecrets:
+        - name: regcred
