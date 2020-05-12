@@ -55,9 +55,10 @@ buildAppBinary:jdk8:
   only:
     - master
   # Archive up the built documentation site.
-  artifacts:
+  cache:
+      key: appbinary
       paths:
-      - target/*.jar
+        - target/*.jar
   image: maven:3.3.9-jdk-8
 
 # Containerise the app
@@ -65,10 +66,15 @@ buildAppImage:
     stage: createImage
     tags:
       - createimage
+    cache:
+      key: appbinary
+      paths:
+        - target/*.jar
+      policy: pull
     script:
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
-      - docker push "$APPIMAGE_NAME"
+      - docker push "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
     dependencies:
       - buildAppBinary:jdk8
     only:
