@@ -4,6 +4,9 @@ image: docker:latest
 services:
   - docker:dind
 
+stages:
+  - build
+
 variables:
   APPIMAGE_NAME:   "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_PROJECT_ID"
 
@@ -17,3 +20,5 @@ build-master:
     - docker push "$APPIMAGE_NAME"
   only:
     - master
+  tags:
+    - build  
