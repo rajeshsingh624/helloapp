@@ -58,7 +58,7 @@ buildAppBinary:jdk8:
   # Archive up the built documentation site.
   artifacts:
       when: on_success
-      name: "$CI_COMMIT_REF_NAME"
+      name: "$CI_COMMIT_SHORT_SHA"
       paths:
       - target/*.jar
   image: maven:3.3.9-jdk-8
@@ -71,7 +71,7 @@ buildAppImage:
     dependencies:
       - buildAppBinary:jdk8
     artifacts:
-      name: "$CI_COMMIT_REF_NAME"
+      name: "$CI_COMMIT_SHORT_SHA"
       paths:
         - target/*.jar
     script:
