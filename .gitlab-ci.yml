@@ -17,11 +17,10 @@ before_script:
 
 build-master:
   stage: build
+  tags: build
   script:
     - docker build --pull -t "$APPIMAGE_NAME" .
     - docker push "$APPIMAGE_NAME"
     - kubectl get ns
   only:
     - master
-  tags:
-    - build  
