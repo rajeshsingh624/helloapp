@@ -66,7 +66,7 @@ buildAppImage:
     tags:
       - createimage
     script:
-	  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
+      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
       - docker push "$APPIMAGE_NAME"
     only:
