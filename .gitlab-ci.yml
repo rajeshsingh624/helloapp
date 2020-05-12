@@ -57,7 +57,7 @@ buildAppBinary:jdk8:
   # Archive up the built documentation site.
   artifacts:
       paths:
-      - target
+      - target/*.jar
   image: maven:3.3.9-jdk-8
 
 # Containerise the app
@@ -69,5 +69,7 @@ buildAppImage:
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
       - docker push "$APPIMAGE_NAME"
+    dependencies:
+      - buildAppBinary:jdk8
     only:
       - master
