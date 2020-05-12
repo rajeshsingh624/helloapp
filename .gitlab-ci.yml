@@ -1,3 +1,4 @@
+
 variables:
   APPIMAGE_NAME:   "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_PROJECT_ID"
   DOCKER_DRIVER: overlay2
@@ -13,7 +14,7 @@ cache:
 
 # we use `test-compile` instead of `validate`, so the correct classpath is picked up.
 .validateCode: &validate
-  stage: buildCode
+  stage: test
   tags:
     - maven
   script:
@@ -21,7 +22,7 @@ cache:
 
 # For merge requests do not `deploy` but only run `verify`
 .verifyFeatureCode: &verify
-  stage: buildApp
+  stage: test
   tags:
     - maven
   script:
@@ -42,7 +43,7 @@ verify:jdk8:
 # For `master` branch run `mvn deploy` automatically
 buildAppBinary:jdk8:
   # Use stage test here, so the pages job may later pickup the created site
-  stage: buildApp
+  stage: build
   tags:
     - maven
   script:
@@ -54,3 +55,4 @@ buildAppBinary:jdk8:
       paths:
       - target
   image: maven:3.3.9-jdk-8
+
