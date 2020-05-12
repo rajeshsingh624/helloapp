@@ -56,10 +56,11 @@ buildAppBinary:jdk8:
   only:
     - master
   # Archive up the built documentation site.
-  cache:
-      key: ${CI_COMMIT_REF_SLUG}
+  artifacts:
+      when: on_success
+      name: "$CI_COMMIT_REF_NAME"
       paths:
-        - target/
+      - target/*.jar
   image: maven:3.3.9-jdk-8
 
 # Containerise the app
@@ -67,9 +68,12 @@ buildAppImage:
     stage: createImage
     tags:
       - createimage
-    cache:
-      key: ${CI_COMMIT_REF_SLUG}
-      # policy: pull 
+    dependencies:
+      - buildAppBinary:jdk8
+    artifacts:
+      name: "$CI_COMMIT_REF_NAME"
+      paths:
+        - target/*.jar
     script:
       - ls -la
       # - mv *.jar target/
