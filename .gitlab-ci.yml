@@ -9,6 +9,8 @@ stages:
 
 variables:
   APPIMAGE_NAME:   "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_PROJECT_ID"
+  DOCKER_DRIVER: overlay2
+  KUBE_CONFIG_FILE: /Users/srajeshkumar/.kube/config
 
 before_script:
   - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
@@ -18,6 +20,7 @@ build-master:
   script:
     - docker build --pull -t "$APPIMAGE_NAME" .
     - docker push "$APPIMAGE_NAME"
+    - kubectl get ns
   only:
     - master
   tags:
