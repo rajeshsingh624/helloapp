@@ -13,7 +13,7 @@ variables:
   KUBE_CONFIG_FILE: /Users/srajeshkumar/.kube/config
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" index.docker.io
 
 build-master:
   stage: build
