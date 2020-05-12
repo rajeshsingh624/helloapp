@@ -51,7 +51,7 @@ buildAppBinary:jdk8:
   tags:
     - maven
   script:
-    - 'mvn $MAVEN_CLI_OPTS package'
+    - 'mvn $MAVEN_CLI_OPTS package -DskipTests'
   only:
     - master
   # Archive up the built documentation site.
@@ -70,8 +70,9 @@ buildAppImage:
       key: appbinary
       paths:
         - target/*.jar
-      policy: pull
+      policy: pull 
     script:
+      - system *%W(ls -la)
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
       - docker push "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
