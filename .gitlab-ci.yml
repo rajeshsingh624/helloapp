@@ -77,8 +77,8 @@ buildAppImage:
     script:
       - ls -la
       # - mv *.jar target/
-      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
-      - docker build -t "docker.io/txconsole/helloapp:gitlab-v01" .
-      - docker push "docker.io/txconsole/helloapp:gitlab-v01"
+      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+      - docker build -t "$APPIMAGE_NAME" .
+      - docker push "$APPIMAGE_NAME"
     only:
       - master
