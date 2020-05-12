@@ -1,4 +1,3 @@
-
 variables:
   APPIMAGE_NAME:   "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_PROJECT_ID"
   DOCKER_DRIVER: overlay2
@@ -17,7 +16,7 @@ cache:
   stage: build
   script:
     - 'mvn $MAVEN_CLI_OPTS test-compile'
-	
+
 # For merge requests do not `deploy` but only run `verify`.
 # See https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 .verify: &verify
