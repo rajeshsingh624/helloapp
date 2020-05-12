@@ -6,8 +6,9 @@ variables:
   KUBE_CONFIG_FILE: /Users/srajeshkumar/.kube/config
 
 stages:
-  - test
+  - testCode
   - build
+  - createImage
 
 # Cache downloaded dependencies and plugins between builds.
 # To keep cache across branches add 'key: "$CI_JOB_NAME"'
@@ -17,7 +18,7 @@ cache:
 
 # we use `test-compile` instead of `validate`, so the correct classpath is picked up.
 .validateCode: &validate
-  stage: test
+  stage: testCode
   tags:
     - maven
   script:
@@ -25,7 +26,7 @@ cache:
 
 # For merge requests do not `deploy` but only run `verify`
 .verifyFeatureCode: &verify
-  stage: test
+  stage: testCode
   tags:
     - maven
   script:
@@ -59,3 +60,14 @@ buildAppBinary:jdk8:
       - target
   image: maven:3.3.9-jdk-8
 
+# Containerise the app
+buildAppImage:
+    stage: createImage
+    tags:
+      - createimage
+    script:
+	  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
+      - docker build --pull -t "$APPIMAGE_NAME" .
+      - docker push "$APPIMAGE_NAME"
+    only:
+      - master
