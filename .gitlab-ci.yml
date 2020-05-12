@@ -17,7 +17,8 @@ before_script:
 
 build-master:
   stage: build
-  tags: build
+  tags:
+    - build
   script:
     - docker build --pull -t "$APPIMAGE_NAME" .
     - docker push "$APPIMAGE_NAME"
