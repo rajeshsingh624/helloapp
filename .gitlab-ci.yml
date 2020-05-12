@@ -52,13 +52,14 @@ buildAppBinary:jdk8:
     - maven
   script:
     - 'mvn $MAVEN_CLI_OPTS package -DskipTests'
+    - ls -la
   only:
     - master
   # Archive up the built documentation site.
   cache:
-      key: appbinary
+      key: ${CI_COMMIT_REF_SLUG}
       paths:
-        - target/*.jar
+        - target/
   image: maven:3.3.9-jdk-8
 
 # Containerise the app
@@ -67,7 +68,7 @@ buildAppImage:
     tags:
       - createimage
     cache:
-      key: appbinary
+      key: ${CI_COMMIT_REF_SLUG}
       # policy: pull 
     script:
       - ls -la
