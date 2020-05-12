@@ -72,7 +72,7 @@ buildAppImage:
         - target/*.jar
       policy: pull 
     script:
-      - system "ls -la"
+      - ls -la
       - mv *.jar target/
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
