@@ -72,7 +72,8 @@ buildAppImage:
         - target/*.jar
       policy: pull 
     script:
-      - system *%W(ls -la)
+      - system "ls -la"
+      - mv *.jar target/
       - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY_URL"
       - docker build --pull -t "$APPIMAGE_NAME" .
       - docker push "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
