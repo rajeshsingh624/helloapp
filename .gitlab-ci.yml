@@ -5,8 +5,8 @@ variables:
 
 kubectl-test:
   tags:
-    - --help
+    - kubectl
   script:
-    - ls
+    - --help
   only:
     - master
