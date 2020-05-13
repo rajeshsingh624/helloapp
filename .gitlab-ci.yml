@@ -9,7 +9,9 @@ variables:
 deploy:
   stage: deploy
   image:
-    name: bitnami/kubectl:1.15.3
+    name: bitnami/kubectl:1.17.4
+  tags:
+    - kubectl
   script:
     - ls -la
     - env
