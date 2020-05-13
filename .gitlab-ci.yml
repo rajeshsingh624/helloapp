@@ -13,6 +13,7 @@ deploy:
   tags:
     - kubectl
   script:
-    - kubectl --help
+    - echo $KUBECONFIG
+    - env
   only:
     - master
