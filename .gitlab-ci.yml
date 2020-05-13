@@ -4,8 +4,9 @@ variables:
 
 kubectl-test:
   tags:
-    - kubectl
+    - gcrkube
   script:
     - env
+    - kubectl --help
   only:
     - master
