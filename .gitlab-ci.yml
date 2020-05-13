@@ -7,6 +7,6 @@ kubectl-test:
   tags:
     - kubectl
   script:
-    - ech "hello world"
+    - ls
   only:
     - master
