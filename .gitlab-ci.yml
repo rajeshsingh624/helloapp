@@ -1,19 +1,11 @@
 variables:
-  APPIMAGE_NAME:   "$CI_REGISTRY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA"
-  DOCKER_DRIVER: overlay2
-  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   KUBE_CONFIG_FILE: /Users/srajeshkumar/.kube/config
   KUBE_CONTEXT: workload-knv-admin@workload-knv
 
-deploy:
-  stage: deploy
-  image:
-    name: bitnami/kubectl:1.17.4
+kubectl-test:
   tags:
     - kubectl
   script:
-    - echo $KUBECONFIG
-    - env
+    - echo "$KUBECONFIG"
   only:
     - master
