@@ -1,9 +1,12 @@
 variables:
   KUBE_CONFIG_FILE: /Users/srajeshkumar/.kube/config
   KUBE_CONTEXT: workload-knv-admin@workload-knv
+  KUBECTL_VERSION: 1.17
 
 kubectl-test:
   tags:
     - kubectl
+  script:
+    - kubectl --help
   only:
     - master
