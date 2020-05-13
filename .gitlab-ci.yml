@@ -5,7 +5,7 @@ variables:
 
 kubectl-test:
   tags:
-    - kubectl
+    - --help
   script:
     - ls
   only:
