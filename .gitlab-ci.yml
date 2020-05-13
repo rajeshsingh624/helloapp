@@ -6,6 +6,6 @@ kubectl-test:
   tags:
     - kubectl
   script:
-    - echo "$KUBECONFIG"
+    - env
   only:
     - master
