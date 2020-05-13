@@ -13,8 +13,6 @@ deploy:
   tags:
     - kubectl
   script:
-    - ls -la
-    - env
     - kubectl config use-context "$KUBE_CONTEXT"
     - kubectl get ns
   only:
