@@ -23,4 +23,4 @@ maven_build:
   image: maven:3.3.9-jdk-8
   script:
     - echo "Building project with maven"
-    - mvn verify
+    - mvn clean package
