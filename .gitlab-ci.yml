@@ -1,7 +1,0 @@
-kubectl-test:
-  tags:
-    - kubectl
-  script:
-    - kubectl --help
-  only:
-    - master
