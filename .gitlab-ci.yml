@@ -17,7 +17,7 @@ maven_build:
   # Of course, it is our duty to actually configure a runner
   # with the tag 'maven' and a working maven installation
   tags:
-    - maven
+    - myrunner
   # Here you can execute arbitrate terminal commands.
   # If any of the commands returns a non zero exit code the job fails.
   image: maven:3.3.9-jdk-8
