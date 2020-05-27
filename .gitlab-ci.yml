@@ -18,6 +18,8 @@ maven_build:
   # with the tag 'maven' and a working maven installation
   # Here you can execute arbitrate terminal commands.
   # If any of the commands returns a non zero exit code the job fails.
+  tags:
+    - myrunner
   image: maven:3.3.9-jdk-8
   script:
     - echo "Building project with maven"
