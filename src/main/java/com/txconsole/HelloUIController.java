@@ -20,7 +20,7 @@ public class HelloUIController {
 	
 	@GetMapping(value = {"/", "/index"})
 	public String index(Model model, HttpServletRequest request) throws MalformedURLException {
-		
+		log.info("Homme page is triggered..!");
 		return "index";
 	}
 
