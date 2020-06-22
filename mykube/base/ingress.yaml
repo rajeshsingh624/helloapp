@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: helloapp
+  labels:
+        type: ingress
+spec:
+  rules:
+  - host: helloapp.lab.app.10.16.202.119.nip.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: helloapp
+          servicePort: 8080
