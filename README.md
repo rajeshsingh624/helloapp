@@ -2,4 +2,4 @@
 
 ## Description
 
-This is the Hello World application built with Spring-boot for poc purpose.
+This is the Hello World application built with Spring-boot for POC purpose.
