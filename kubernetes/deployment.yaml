@@ -14,7 +14,7 @@ spec:
         app: helloapp
     spec:
       imagePullSecrets:
-      - name: regcred
+      - name: my-dockerhub-creds
       containers:
       - image: txconsole/helloapp
         name: helloapp
